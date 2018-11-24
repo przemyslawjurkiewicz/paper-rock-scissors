@@ -49,12 +49,12 @@ body {
    text-align: center;
   min-width: 200px;
   max-width: 300px;
-  border: 2px solid green;
+  border: 2px solid #1784f1;
    p {
     text-transform: uppercase;
     font-size: 20px;
     margin: 5px;
-    color: red;
+    color: #2f4255;
   }
 }
 
@@ -65,3 +65,18 @@ body {
     cursor: pointer;
   }
 }
+
+.images {
+    .card {
+        border: none;
+        p{
+            color: #1784f1;
+        }
+    }
+    img {
+        max-width: 200px;
+        height: auto;
+    }
+    
+}
+

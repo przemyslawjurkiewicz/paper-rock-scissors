@@ -12,6 +12,8 @@
   var choosePaperkButton = document.getElementById("choosePaper");
   var chooseScissorsButton = document.getElementById("chooseScissors");
   var roundWinner = document.getElementById("result");
+ // var playerImage = document.getElementById("playerChooseImage").src;
+ // var computerImage = document.getElementById("computerChooseImage").src;
 
   document.addEventListener("DOMContentLoaded", function() {
     playerName = window.prompt("Add your Name:");
@@ -57,12 +59,15 @@
     switch (x) {
       case 1:
         computerChoose = "rock";
+        document.getElementById("computerChooseImage").src = "images/rocki.png"
         break;
       case 2:
         computerChoose = "paper";
+        document.getElementById("computerChooseImage").src = "images/paperi.png"
         break;
       case 3:
         computerChoose = "scissors";
+        document.getElementById("computerChooseImage").src = "images/scissorsi.png"
         break;
     }
     console.log("comp:" + computerChoose);
@@ -70,13 +75,16 @@
 
   chooseRockButton.addEventListener("click", function() {
     playerMove("rock");
+    document.getElementById("playerChooseImage").src = "images/rocki.png"
   });
 
   choosePaperkButton.addEventListener("click", function() {
     playerMove("paper");
+    document.getElementById("playerChooseImage").src = "images/paperi.png"
   });
 
   chooseScissorsButton.addEventListener("click", function() {
     playerMove("scissors");
+    document.getElementById("playerChooseImage").src = "images/scissorsi.png"
   });
 })();

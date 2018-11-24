@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Paper rock scissors Game</title>
@@ -8,25 +9,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="css/style.css" />
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
-  </head>
-  <body>
-    <header class="container"><h1>Game "Paper Rock Scissors"</h1></header>
+</head>
+
+<body>
+    <header class="container">
+        <h1>Game "Paper Rock Scissors"</h1>
+    </header>
     <section class="gameboard container">
-      <h2>Results :</h2>
-      <p id="result">Round winer is:</p>
-      <div class="row">
-        <div class="card" id="playerScores"></div>
-        <div class="card" id="computerScores"></div>
-      </div>
+        <h2>Results :</h2>
+        <p id="result">Round winer is:</p>
+        <div class="row">
+            <div class="card" id="playerScores"></div>
+            <div class="card" id="computerScores"></div>
+        </div>
+    </section>
+    <section class="images container">
+        <div class="row">
+            <div class="card">
+                <p>PLAYER:</p>
+                <img id="playerChooseImage" src="images/scissorsi.png" />
+            </div>
+            <div class="card">
+                <p>COMPUTER:</p>
+                <img id="computerChooseImage" src="images/scissorsi.png" />
+            </div>
     </section>
     <section class="moves container">
-      <h2>Choose your move :</h2>
-      <div class="row">
-        <img id="chooseRock" src="images/rock.png" />
-        <img id="choosePaper" src="images/paper.png" />
-        <img id="chooseScissors" src="images/scissors.png" />
-      </div>
+        <h2>Choose your move :</h2>
+        <div class="row">
+            <img id="chooseRock" src="images/rock.png" />
+            <img id="choosePaper" src="images/paper.png" />
+            <img id="chooseScissors" src="images/scissors.png" />
+        </div>
     </section>
     <script src="js/script.js"></script>
-  </body>
+</body>
+
 </html>

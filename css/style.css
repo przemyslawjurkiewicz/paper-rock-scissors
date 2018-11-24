@@ -48,20 +48,33 @@ body {
   text-align: center;
   min-width: 200px;
   max-width: 300px;
-  border: 2px solid green;
+  border: 2px solid #1784f1;
 }
 
 .card p {
   text-transform: uppercase;
   font-size: 20px;
   margin: 5px;
-  color: red;
+  color: #2f4255;
 }
 
 .moves img {
   margin: 0 20px;
   max-height: 50px;
   cursor: pointer;
+}
+
+.images .card {
+  border: none;
+}
+
+.images .card p {
+  color: #1784f1;
+}
+
+.images img {
+  max-width: 200px;
+  height: auto;
 }
 
 /*# sourceMappingURL=style.css.map */
