@@ -80,3 +80,24 @@ body {
     
 }
 
+.new-game {
+  height: 40px;
+  width: 200px;
+  color: #1784f1;
+  font-size: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: block;
+}
+
+.funny {
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  right: 0;
+}

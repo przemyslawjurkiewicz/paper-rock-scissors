@@ -15,15 +15,26 @@
     <header class="container">
         <h1>Game "Paper Rock Scissors"</h1>
     </header>
-    <section class="gameboard container">
-        <h2>Results :</h2>
-        <p id="result">Round winer is:</p>
+    <section class="moves container hidden">
+        <h2>Choose your move :</h2>
+        <div class="row" id="buttons">
+            <img id="chooseRock" src="images/rock.png" />
+            <img id="choosePaper" src="images/paper.png" />
+            <img id="chooseScissors" src="images/scissors.png" />
+        </div>
+        <hr>
+    </section>
+    <section class="new container">
+        <button class="new-game" id="new-game">NEW GAME</button>
+    </section>
+    <section class="container hidden">
+        <p id="result">Here are the results.</p>
         <div class="row">
             <div class="card" id="playerScores"></div>
             <div class="card" id="computerScores"></div>
         </div>
     </section>
-    <section class="images container">
+    <section class="images container hidden">
         <div class="row">
             <div class="card">
                 <p>PLAYER:</p>
@@ -34,14 +45,7 @@
                 <img id="computerChooseImage" src="images/scissorsi.png" />
             </div>
     </section>
-    <section class="moves container">
-        <h2>Choose your move :</h2>
-        <div class="row">
-            <img id="chooseRock" src="images/rock.png" />
-            <img id="choosePaper" src="images/paper.png" />
-            <img id="chooseScissors" src="images/scissors.png" />
-        </div>
-    </section>
+    <img class="funny" id="funny" src="images/haha.png" />
     <script src="js/script.js"></script>
 </body>
 
