@@ -1,5 +1,6 @@
 "use strict";
 (function() {
+  //declarations of global variables
   var playerResult;
   var computerResult;
   var playerName;
@@ -17,6 +18,7 @@
   var newGameButton = document.getElementById("new-game");
   var hiddenElements = document.getElementsByClassName("hidden");
 
+  //question about the name after load
   document.addEventListener("DOMContentLoaded", function() {
     playerName = window.prompt("Enter your Name:");
     welcome.insertAdjacentHTML(
@@ -25,27 +27,38 @@
     );
   });
 
+  //new game button
   newGameButton.addEventListener("click", function() {
+    //question about round limit
     enterRoundLimit();
+    //change visible elements hidden after the page has been loaded
     for (var i = 0; i < hiddenElements.length; i++) {
       hiddenElements[i].classList.add("visible");
     }
+    //reset variables
     round = 1;
     playerResult = 0;
     computerResult = 0;
-    roundWinner.innerHTML ="Here are the results.";
+    roundWinner.innerHTML = "Here are the results.";
     displayScores(playerResult, computerResult);
+    document.getElementById("computerChooseImage").src = "images/comp.png";
+    document.getElementById("playerChooseImage").src = "images/player.png";
+    //hide new game button
     this.classList.toggle("hidden");
+    //showing the buttons with a choice
     document.getElementById("buttons").style.visibility = "visible";
   });
 
+  //question about round limit
   var enterRoundLimit = function() {
+    //if limit is wrong
     roundsLimit = window.prompt("Enter the limit of rounds:");
     isNaN(roundsLimit) || !roundsLimit
       ? (alert("Enter the number !!!"), enterRoundLimit())
       : roundsLimit;
   };
 
+  //score boards
   var displayScores = function(playerResult, computerResult) {
     playerScoresBoard.innerHTML =
       "<p>" + playerName + " :</p><p>" + playerResult + "</p>";
@@ -53,15 +66,17 @@
       "<p>COMPUTER: </p><p>" + computerResult + "</p>";
   };
 
+  //display who win the round
   var displayWinner = function(winner) {
     roundWinner.innerHTML =
       winner == "player"
-        ? "Round " + round + "/" + roundsLimit+": win" + playerName 
+        ? "Round " + round + "/" + roundsLimit + ": win " + playerName
         : winner == "computer"
-        ? "Round " + round + "/" + roundsLimit + ": win Computer"
-        : "Round " + round + "/" + roundsLimit + ": Remis";
+        ? "Round " + round + "/" + roundsLimit + ": win Computer "
+        : "Round " + round + "/" + roundsLimit + ": Remis ";
   };
 
+  //player move after click "choose butoons"
   var playerMove = function(playerChoose) {
     computerMove();
     playerChoose == computerChoose
@@ -73,9 +88,11 @@
       : ((computerResult += 1), (winner = "computer"));
     displayScores(playerResult, computerResult);
     displayWinner(winner);
+    //check if this is the last round
     round == roundsLimit ? whoWinsAll() : (round += 1);
   };
 
+  //who wins all rounds
   var whoWinsAll = function() {
     playerResult == computerResult
       ? allRemis()
@@ -85,23 +102,21 @@
   };
 
   var allRemis = function() {
-   showFunny();
+    showFunny();
     document.getElementById("funny").src = "images/haha1.png";
-    
   };
 
   var allPlayer = function() {
     showFunny();
     document.getElementById("funny").src = "images/haha2.png";
-    
   };
 
   var allComputer = function() {
     showFunny();
     document.getElementById("funny").src = "images/haha3.png";
-    
   };
 
+  //show funny donkey for 2 seconds
   var showFunny = function() {
     document.getElementById("funny").style.visibility = "visible";
     document.getElementById("buttons").style.visibility = "hidden";
@@ -113,10 +128,12 @@
         hiddenElements[i].classList.remove("visible");
       }
     }, 2000);
-  }
+  };
 
+  //computer move after player move
   var computerMove = function() {
     var x = Math.floor(Math.random() * 3 + 1);
+    //display computer choise picture
     switch (x) {
       case 1:
         computerChoose = "rock";
@@ -135,6 +152,7 @@
     }
   };
 
+  //player chooise butoons, change pictures
   chooseRockButton.addEventListener("click", function() {
     playerMove("rock");
     document.getElementById("playerChooseImage").src = "images/rocki.png";
