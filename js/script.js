@@ -49,7 +49,7 @@
     document.getElementById("buttons").style.visibility = "visible";
   });
 
-  //question about round limit
+  //question about round limit.
   var enterRoundLimit = function() {
     //if limit is wrong
     roundsLimit = window.prompt("Enter the limit of rounds:");
