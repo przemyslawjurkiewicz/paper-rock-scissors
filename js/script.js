@@ -96,19 +96,16 @@
     displayWinner(winner);
     //check if this is the last round
     if (round == roundsLimit) {
-      whoWinsAll();
+      if (playerResult == computerResult) {
+        allRemis();
+      } else if (playerResult > computerResult) {
+        allPlayer();
+      } else {
+        allComputer();
+      }
     } else {
       round += 1;
     }
-  };
-
-  //who wins all rounds
-  var whoWinsAll = function() {
-    playerResult == computerResult
-      ? allRemis()
-      : playerResult > computerResult
-      ? allPlayer()
-      : allComputer();
   };
 
   var allRemis = function() {
