@@ -65,18 +65,7 @@
     computerScoresBoard.innerHTML = `<p>COMPUTER: </p><p> ${computerResult}</p>`;
   };
 
-  //display who win the round
-  var displayWinner = function(winner) {
-    if (winner == 'player') {
-      roundWinner.innerHTML = `Round ${round}/${roundsLimit}: win ${playerName}`;
-    } else if (winner == 'computer') {
-      roundWinner.innerHTML = `Round ${round}/${roundsLimit}: win Computer`;
-    } else {
-      `Round ${round}/${roundsLimit}: Remis`;
-    }
-  };
-
-  //player move after click 'choose butoons'
+    //player move after click 'choose butoons'
   var playerMove = function(playerChoose) {
     computerMove();
     if (playerChoose == computerChoose) {
@@ -96,15 +85,31 @@
     displayWinner(winner);
     //check if this is the last round
     if (round == roundsLimit) {
-      if (playerResult == computerResult) {
-        allRemis();
-      } else if (playerResult > computerResult) {
-        allPlayer();
-      } else {
-        allComputer();
-      }
+      whoWinsAll();
     } else {
       round += 1;
+    }
+  };
+
+  //display who win the round
+  var displayWinner = function(win) {
+    if (win == 'player') {
+      roundWinner.innerHTML = `Round ${round}/${roundsLimit}: win ${playerName}`;
+    } else if (win == 'computer') {
+      roundWinner.innerHTML = `Round ${round}/${roundsLimit}: win Computer`;
+    } else {
+      roundWinner.innerHTML = `Round ${round}/${roundsLimit}: Remis`;
+    }
+  };
+
+  //who wins all rounds
+  var whoWinsAll = function() {
+    if (playerResult == computerResult) {
+      allRemis();
+    } else if (playerResult > computerResult) {
+      allPlayer();
+    } else {
+      allComputer();
     }
   };
 
