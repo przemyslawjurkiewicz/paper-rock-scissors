@@ -6,17 +6,9 @@
     playerName: 'player',
     computerChoose: 'none',
     winner: 'none',
-    roundsLimit: 4,
-    round: 1,
-  }
-  //declarations of global variables
-  //var playerResult;
- // var computerResult;
- // var playerName;
- // var computerChoose;
-  //var winner;
-  //var roundsLimit = 3;
- // var round;
+    roundsLimit: 0,
+    round: 1
+  };
   var welcome = document.querySelector('header');
   var playerScoresBoard = document.getElementById('playerScores');
   var computerScoresBoard = document.getElementById('computerScores');
@@ -26,49 +18,67 @@
 
   //question about the name after load
   window.onload = function() {
-    // playerName = window.prompt('Enter your Name:');
-    //  playerName = !playerName ? 'Player' : playerName;
-    params.playerName = 'player';
-    welcome.insertAdjacentHTML(
-      'beforeend',
-      `<p>Welcome  ${params.playerName} in the most popular game in the world.</p>`
-    );
+    showModal('#qestions');
+  };
+
+  //Show modal function
+  var showModal = function(modal) {
+    //Dodanie klasy show do overlay.
+    document.querySelector('#modal-overlay').classList.add('visible');
+    //Dodanie klasy show do pobranego modala.
+    document.querySelector(modal).classList.add('visible');
+  };
+
+  //Hide all modals function
+  var hideModal = function() {
+    document.querySelectorAll('.modal').forEach(function(modal) {
+      modal.classList.remove('visible');
+    });
+    document.querySelector('#modal-overlay').classList.remove('visible');
   };
 
   //new game button
   newGameButton.addEventListener('click', function() {
-    //question about round limit
-    //enterRoundLimit();
-    //change visible elements hidden after the page has been loaded
-    //for (var i = 0; i < hiddenElements.length; i++) {
-    // hiddenElements[i].classList.add('visible');
-    //}
-    //reset variables
+    //Question about the name and number of rounds
+    params.playerName = document.querySelector('[name="name"]').value;
+    if (params.playerName == '') {
+      alert('Name must be filled out');
+      return false;
+    }
+    if (params.playerName.length < 3) {
+      alert('Name must be min 3 scharset');
+      return false;
+    }
+    params.roundsLimit = document.querySelector('[name="rounds"]').value;
+    if (params.roundsLimit == '') {
+      alert('Number of rounds must be filled');
+      return false;
+    }
+    //hide modal  
+    hideModal();
+    ///reset params
     params.round = 1;
     params.playerResult = 0;
     params.computerResult = 0;
+    //reset display
     roundWinner.innerHTML = 'Here are the results.';
     displayScores(params.playerResult, params.computerResult);
     document.getElementById('computerChooseImage').src = 'images/comp.png';
     document.getElementById('playerChooseImage').src = 'images/player.png';
-    //hide new game button
-    this.classList.toggle('hidden');
-    //showing the buttons with a choice
-    document.getElementById('buttons').style.visibility = 'visible';
+    welcome.insertAdjacentHTML(
+      'beforeend',
+      `<p>Welcome  ${
+        params.playerName
+      } in the most popular game in the world.</p>`
+    );
   });
 
-  //question about round limit.
-  var enterRoundLimit = function() {
-    //if limit is wrong
-    params.roundsLimit = window.prompt('Enter the limit of rounds:');
-    isNaN(params.roundsLimit) || !params.roundsLimit
-      ? (alert('Enter the number !!!'), enterRoundLimit())
-      : params.roundsLimit;
-  };
-
+  
   //score boards
   var displayScores = function(playerResult, computerResult) {
-    playerScoresBoard.innerHTML = `<p>${params.playerName}: </p><p> ${playerResult}</p>`;
+    playerScoresBoard.innerHTML = `<p>${
+      params.playerName
+    }: </p><p> ${playerResult}</p>`;
     computerScoresBoard.innerHTML = `<p>COMPUTER: </p><p> ${computerResult}</p>`;
   };
 
@@ -103,11 +113,17 @@
   //display who win the round
   var displayWinner = function(win) {
     if (win == 'player') {
-      roundWinner.innerHTML = `Round ${params.round}/${params.roundsLimit}: win ${params.playerName}`;
+      roundWinner.innerHTML = `Round ${params.round}/${
+        params.roundsLimit
+      }: win ${params.playerName}`;
     } else if (win == 'computer') {
-      roundWinner.innerHTML = `Round ${params.round}/${params.roundsLimit}: win Computer`;
+      roundWinner.innerHTML = `Round ${params.round}/${
+        params.roundsLimit
+      }: win Computer`;
     } else {
-      roundWinner.innerHTML = `Round ${params.round}/${params.roundsLimit}: Remis`;
+      roundWinner.innerHTML = `Round ${params.round}/${
+        params.roundsLimit
+      }: Remis`;
     }
   };
 
@@ -157,15 +173,15 @@
     //transform numbers to names of moves
     switch (x) {
       case 1:
-      params.computerChoose = 'rock';
+        params.computerChoose = 'rock';
         compImagesShow(params.computerChoose);
         break;
       case 2:
-      params.computerChoose = 'paper';
+        params.computerChoose = 'paper';
         compImagesShow(params.computerChoose);
         break;
       case 3:
-      params.computerChoose = 'scissors';
+        params.computerChoose = 'scissors';
         compImagesShow(params.computerChoose);
         break;
     }
