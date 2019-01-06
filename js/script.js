@@ -7,14 +7,16 @@
     computerChoose: 'none',
     winner: 'none',
     roundsLimit: 0,
-    round: 1
+    round: 1,
+    progres: []
   };
-  var welcome = document.querySelector('header');
+  var welcome = document.getElementById('welcome');
   var playerScoresBoard = document.getElementById('playerScores');
   var computerScoresBoard = document.getElementById('computerScores');
   var roundWinner = document.getElementById('result');
   var newGameButton = document.getElementById('new-game');
-  var hiddenElements = document.getElementsByClassName('hidden');
+  var startGameButton = document.getElementById('start-game');
+  var statsTable = document.getElementById('stats-table');
 
   //question about the name after load
   window.onload = function() {
@@ -37,8 +39,8 @@
     document.querySelector('#modal-overlay').classList.remove('visible');
   };
 
-  //new game button
-  newGameButton.addEventListener('click', function() {
+  //start game button
+  startGameButton.addEventListener('click', function() {
     //Question about the name and number of rounds
     params.playerName = document.querySelector('[name="name"]').value;
     if (params.playerName == '') {
@@ -54,26 +56,42 @@
       alert('Number of rounds must be filled');
       return false;
     }
-    //hide modal  
+    if (isNaN(params.roundsLimit)) {
+      alert('It must be a number');
+      return false;
+    }
+    if (params.roundsLimit % 1 != 0) {
+      alert('It must be a whole number');
+      return false;
+    }
+    //hide modal
     hideModal();
     ///reset params
     params.round = 1;
     params.playerResult = 0;
     params.computerResult = 0;
+    params.progres = [];
     //reset display
     roundWinner.innerHTML = 'Here are the results.';
+    document.getElementById('buttons').style.visibility = 'visible';
     displayScores(params.playerResult, params.computerResult);
     document.getElementById('computerChooseImage').src = 'images/comp.png';
     document.getElementById('playerChooseImage').src = 'images/player.png';
-    welcome.insertAdjacentHTML(
-      'beforeend',
-      `<p>Welcome  ${
-        params.playerName
-      } in the most popular game in the world.</p>`
-    );
+    welcome.innerHTML =
+      '<p>Welcome ' +
+      params.playerName +
+      ' in the most popular game in the world.</p>';
   });
 
-  
+  //new game button
+  newGameButton.addEventListener('click', function() {
+    statsTable.innerHTML = '';
+    hideModal();
+    showModal('#qestions');
+    document.querySelector('[name="rounds"]').value = params.roundsLimit;
+    document.querySelector('[name="name"]').value = params.playerName;
+  });
+
   //score boards
   var displayScores = function(playerResult, computerResult) {
     playerScoresBoard.innerHTML = `<p>${
@@ -101,12 +119,37 @@
     }
     displayScores(params.playerResult, params.computerResult);
     displayWinner(params.winner);
+    params.progres.push({
+      roundNumber: params.round,
+      playerMoveInRound: playerChoose,
+      compMoveInRound: params.computerChoose,
+      whoWinRound: params.winner
+    });
+    console.log(params.progres);
     //check if this is the last round
     if (params.round == params.roundsLimit) {
       whoWinsAll();
+      showModal('#stats');
+      modalStatsTable();
     } else {
       params.round += 1;
-      console.log(params.round);
+    }
+  };
+
+  var modalStatsTable = function() {
+    statsTable.innerHTML =
+      '<thead><tr><th>Round:</th><th>Your Move</th><th>Computer Move</th><th>Round Result</th></tr></thead>';
+    for (var i = 0; i < params.progres.length; i++) {
+      statsTable.innerHTML +=
+        '<tr><td>' +
+        params.progres[i].roundNumber +
+        '</td><td>' +
+        params.progres[i].playerMoveInRound +
+        '</td><td>' +
+        params.progres[i].compMoveInRound +
+        '</td><td>' +
+        params.progres[i].whoWinRound +
+        '</td></tr>';
     }
   };
 
@@ -130,40 +173,29 @@
   //who wins all rounds
   var whoWinsAll = function() {
     if (params.playerResult == params.computerResult) {
-      allRemis();
+      showFunny('#remis');
     } else if (params.playerResult > params.computerResult) {
-      allPlayer();
+      showFunny('#player');
     } else {
-      allComputer();
+      showFunny('#computer');
     }
   };
 
-  var allRemis = function() {
-    showFunny();
-    document.getElementById('funny').src = 'images/haha1.png';
-  };
-
-  var allPlayer = function() {
-    showFunny();
-    document.getElementById('funny').src = 'images/haha2.png';
-  };
-
-  var allComputer = function() {
-    showFunny();
-    document.getElementById('funny').src = 'images/haha3.png';
-  };
+  //
+  var hideFunny = function () {
+    document.querySelectorAll('.funny').forEach(function(e) {
+      e.classList.remove('visible');
+      e.classList.add('hidden');
+    });
+  }
 
   //show funny donkey for 2 seconds
-  var showFunny = function() {
-    document.getElementById('funny').style.visibility = 'visible';
+  var showFunny = function(selector) {
+    document.querySelector(selector).classList.add('visible');
+    console.log(document.querySelector(selector));
     document.getElementById('buttons').style.visibility = 'hidden';
     setTimeout(function() {
-      document.getElementById('funny').style.visibility = 'hidden';
-      newGameButton.classList.toggle('hidden');
-      var i;
-      for (i = 0; i < hiddenElements.length; i++) {
-        hiddenElements[i].classList.remove('visible');
-      }
+      hideFunny();
     }, 2000);
   };
 

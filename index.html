@@ -14,6 +14,7 @@
 <body>
     <header class="container">
         <h1>Game "Paper Rock Scissors"</h1>
+        <div id="welcome"></div>
     </header>
     <section class="moves container">
         <h2>Choose your move :</h2>
@@ -55,14 +56,24 @@
                 <label>Enter Your name</label>
                 <input class="input" type="text" name="name" maxlength="150" placeholder="Enter name">
                 <label>How many rounds you want to play?</label>
-                <input class="input" type="number" name="rounds" min="1" placeholder="Enter number of rounds" >
-                <button class="new-game" id="new-game" >START A GAME</button>
+                <input class="input" type="number" name="rounds" min="1" placeholder="Enter number of rounds">
+                <button class="new-game" id="start-game">START A GAME</button>
+            </div>
+        </div>
+        <div class="modal" id="stats">
+            <header>Game stats</header>
+            <div class="content">
+                <div class="wrapper">
+                    <table id="stats-table">
+                    </table>
+                </div>
+                <button class="new-game" id="new-game">NEW GAME</button>
             </div>
         </div>
     </div>
-    <img class="funny" id="funny" src="images/haha1.png" />
-    <img class="funny" id="funny" src="images/haha2.png" />
-    <img class="funny" id="funny" src="images/haha3.png" />
+    <img id="remis" class="funny hidden" src="images/haha1.png" />
+    <img id="player" class="funny hidden" src="images/haha2.png" />
+    <img id="computer" class="funny hidden" src="images/haha3.png" />
     <script src="js/script.js"></script>
 </body>
 
