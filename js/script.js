@@ -138,7 +138,7 @@
 
   var modalStatsTable = function() {
     statsTable.innerHTML =
-      '<thead><tr><th>Round:</th><th>Your Move</th><th>Computer Move</th><th>Round Result</th></tr></thead>';
+      '<thead><tr><th>Round:</th><th>Your move</th><th>Computer move</th><th>Round winner</th></tr></thead>';
     for (var i = 0; i < params.progres.length; i++) {
       statsTable.innerHTML +=
         '<tr><td>' +
