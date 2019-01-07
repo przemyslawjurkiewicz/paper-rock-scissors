@@ -21,9 +21,9 @@
 
   //Show modal function
   var showModal = function(modal) {
-    //Dodanie klasy show do overlay.
+    //Add show to overlay.
     document.querySelector('#modal-overlay').classList.add('visible');
-    //Dodanie klasy show do pobranego modala.
+    //Add show to modal.
     document.querySelector(modal).classList.add('visible');
   };
 
